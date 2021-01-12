@@ -2,24 +2,24 @@
     <div>
         <h3>修改图书信息页面</h3>
         <hr>
-        <el-form :data="book" status-icon  ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form :data="student" status-icon  ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="id" prop="ID">
-                <el-input type="text" v-model="book.id" ></el-input>
+                <el-input type="text" v-model="student.id" ></el-input>
             </el-form-item>
-            <el-form-item label="书名" prop="book_name">
-                <el-input type="text" v-model="book.book_name" ></el-input>
+            <el-form-item label="姓名" prop="name">
+                <el-input type="text" v-model="student.name" ></el-input>
             </el-form-item>
-            <el-form-item label="价格" prop="price">
-                <el-input type="text" v-model="book.price" ></el-input>
+            <el-form-item label="密码" prop="password">
+                <el-input type="text" v-model="student.password" ></el-input>
             </el-form-item>
-            <el-form-item label="年龄" prop="create_time">
-                <el-input  type="date" v-model="book.create_time"></el-input>
+            <el-form-item label="年龄" prop="age">
+                <el-input  type="text" v-model="student.age"></el-input>
             </el-form-item>
-            <el-form-item label="出版社" prop="publish">
-                <el-input v-model="book.publish"></el-input>
+            <el-form-item label="生日" prop="bir">
+                <el-input  type="date" v-model="student.bir"></el-input>
             </el-form-item>
-            <el-form-item label="地址" prop="address">
-                <el-input v-model="book.address"></el-input>
+            <el-form-item label="联系方式" prop="phone">
+                <el-input v-model="student.phone"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="update">提交</el-button>
@@ -35,7 +35,7 @@ export default {
     data() {
 
         return {
-          book:[]
+          student:[]
         };
     },
     methods: {
@@ -43,36 +43,37 @@ export default {
         let id = this.$route.params.id;
         //console.log(id)
         this.$axios({
-          url: "http://127.0.0.1:8000/libraryapp/books/" + id,
+          url: "http://127.0.0.1:8000/userapp/student/" + id,
           method: 'get',
         }).then(res => {
           //console.log(res)
           // console.log(res.data.result)
           //alert('123')
-          this.book=res.data.results
+          this.student=res.data
         })
       },
-      update(){
-        this.$axios({
-          url: "http://127.0.0.1:8000/libraryapp/books/" ,
-          method: 'patch',
-          data:{
-            id:this.book.id,
-            book_name: this.book.book_name,
-            price: this.book.price,
-            create_time: this.book.create_time,
-            publish: this.book.publish,
-            address: this.book.address,
-          },
-        }).then(res => {
-
-          console.log(res.data.result)
-          // this.book=res.data.results
-          this.$router.go(-1)
-          alert('更新成功')
-
-        })
-      }
+      // update(){
+      //   this.$axios({
+      //     url: "http://127.0.0.1:8000/userapp/student/" ,
+      //     method: 'patch',
+      //     data:{
+      //       id:this.student.id,
+      //       name: this.student.name,
+      //       password: this.student.password,
+      //       age: this.student.age,
+      //       sex: this.student.sex,
+      //       bir: this.student.bir,
+      //       phone:this.student.phone,
+      //     },
+      //   }).then(res => {
+      //
+      //     console.log(res.data.result)
+      //     // this.book=res.data.results
+      //     this.$router.go(-1)
+      //     alert('更新成功')
+      //
+      //   })
+      // }
 
         },
   created() {
